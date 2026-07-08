@@ -75,17 +75,19 @@ async def streamwriter(stream):
     async for s in stream:
         if "tool" in s:
             message = s["tool"]["messages"][-1]
-            print(message)
-            if isinstance(message, tuple):
-                return 
-            else:
-                return
+            return message
+            
+            
 
 
 async def Runner():
     response = app.astream(({"messages":["user", "Find out about the valkyrie helm"]}))
     await streamwriter(response)
     return AssetReturned[-1]
+
+
+import asyncio
+print(asyncio.run(Runner()))
     
 
 
