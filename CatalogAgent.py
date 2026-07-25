@@ -1,12 +1,16 @@
 import httpx
 from ReactTools import *
+from EconomyAgent import EconomyInfo
+import asyncio
+from RolimonAgent import rolimonExtractor
+from Plotter import PlotGraph
 
 class AgentState(TypedDict):
     messages:Annotated[Sequence[BaseMessage], add_messages]
 
 
 
-@tool
+
 async def catalogAgent(search_term: str):
     """Returns the asset id for a specific item"""
     url = "https://catalog.roblox.com/v1/search/items/details"
@@ -15,25 +19,39 @@ async def catalogAgent(search_term: str):
     # but we will manually slice out the first result inside the code.
     params = {
         "keyword": search_term,
-        "Limit": 10 
+        "limit": 10,
+        "salesTypeFilter": 1,  # 2 = Limiteds & Limited Uniques
+              # 1 = Accessories (FIXED: Changing from 0 to 1 stops the NoneType error)
+        "sortType": 0,         # 3 = Recently updated listings
+        "CreatorTargetId": 1,  # 1 = Filters strictly for the official 'Roblox' account
+        "CreatorType": 1,
+        "includeNotForSale": True     # 1 = Specifies that the creator is a User account
     }
     client = httpx.AsyncClient()
     response = await client.get(url, params=params)
     
     # Check for HTTP status errors (like 429 rate limits or 400 bad requests)
     if response.status_code == 200:
-        data = response.json() # Parse down into a dictionary
-        results_list = data.get("data", [])
+        collectable_item = response.json()["data"][0]["collectibleItemId"]
+        name = response.json()["data"][0]["name"]
+        id = response.json()["data"][0]["id"] # Parse down into a dictionary
+        print(collectable_item, name, id)
+        Assetreturner(collectable_item)
+        Assetreturner(id)
+       
         
-        if results_list:
-            # Index [0] pulls the first matching dictionary object from the array
-            first_item = results_list[0] 
-            Assetreturner(first_item["id"])
-            return "Execution complete"
+        
+        rolimon, economy = await asyncio.gather(rolimonExtractor(AssetReturned[1]), EconomyInfo(AssetReturned[0]))
+        print(rolimon, economy)
+            
+            
+        PlotGraph(economy[0], rolimon[2], rolimon[0], rolimon[1], search_term)
+            
 
         
-        return None
+        return "I don't know"
     
+
 
 AssetReturned = []
 def Assetreturner(ID):
@@ -74,20 +92,19 @@ app = graph.compile()
 async def streamwriter(stream):
     async for s in stream:
         if "tool" in s:
-            message = s["tool"]["messages"][-1]
+            message = s['tool']["messages"][-1]
             return message
             
             
 
 
-async def Runner():
-    response = app.astream(({"messages":["user", "Find out about the valkyrie helm"]}))
+async def Runner(prompt):
+    response = app.astream(({"messages":["user",prompt]}))
     await streamwriter(response)
-    return AssetReturned[-1]
+    
 
 
 import asyncio
-print(asyncio.run(Runner()))
-    
+print(asyncio.run(Runner("Find out about Shaggy item")))
 
 
