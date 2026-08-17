@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyst Report</title>
+    
+    <style>
+        /* --- 🚨 NATIVE WEASYPRINT PAGE-BREAK ENGINE CALIBRATION --- */
+        @page {
+            size: A4;
+            margin: 0.8in; 
+            /* MODIFIED: Swapped out #0b1329 to match the blue graph UI wrapper context */
+            background-color: #141f38; 
+        }
+
+        /* Basic CSS Reset */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            /* MODIFIED: Unified body background to map directly to the graph's container environment */
+            background-color: #141f38;
+            color: #ffffff;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* --- Header Segment --- */
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 3px solid #3a86ff;
+            padding-bottom: 1.25rem;
+            display: block;
+            page-break-inside: avoid;
+        }
+
+        header h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .tags-container {
+            margin-bottom: 1.25rem; 
+            display: block;
+        }
+
+        .analyst-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background-color: #3a86ff; 
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            margin-right: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .meta-data {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        /* --- 🖼️ IMAGE SAFETY WRAPPERS --- */
+        
+
+        /* --- Narrative Text Stream --- */
+        .analysis-description {
+            display: block;
+            margin-bottom: 2rem;
+            white-space: pre-wrap;     
+            page-break-inside: auto;    
+        }
+
+        /* --- Data Graph Block --- */
+        .graph-wrapper {
+            /* MODIFIED: Shifted the background card to a deeper tone (#0b1329) to create low-frequency depth contrast */
+            background-color: #0b1329;
+            /* MODIFIED: Substituted bright alpha values with soft blue lines matching the layout core */
+            border: 1px solid rgba(58, 134, 255, 0.15);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+            display: block;
+            page-break-inside: avoid;   
+        }
+
+        .graph-wrapper img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 8px;
+            /* MODIFIED: Embedded a mix-blend trick for transparent/semi-opaque graph exports to force native blue consistency */
+            background-color: transparent;
+        }
+
+        .graph-caption {
+            font-size: 0.875rem;
+            margin-top: 1.25rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 0.75rem;
+            font-weight: 500;
+            opacity: 0.8;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>{{ report_title }}</h1>
+        <div class="tags-container">
+            {% for tag in report_tags %}
+            <span class="analyst-tag">{{ tag }}</span>
+            {% endfor %}
+        </div>
+        <div class="meta-data">
+            <span><strong>Analyst:</strong> {{ analyst_name }}</span> &nbsp;&nbsp;|&nbsp;&nbsp;
+            <span><strong>Date:</strong> {{ report_date }}</span>
+        </div>
+    </header>
+
+   
+    <img src="{{ top_image_path }}">
+    
+    <h1>Analysis</h1>
+    <section class="analysis-description">{{ analysis_text }}</section>
+    <h1>Graph Citations.</h1>
+    <section class="graph-wrapper">
+    
+    <!-- 1. Open the main graph loop -->
+    {% for graph in graphs %}
+        
+        <!-- Safely injects the raw image filename from your list -->
+        <img src="{{ graph }}" alt="Data Visualization">
+        
+        <!-- 2. Use the current loop's index to pull the matching caption -->
+        <div class="graph-caption">
+            <strong>Data Source: {{ data[loop.index0] }}</strong> 
+        </div>
+        
+    {% endfor %}
+    
+</section>
+
+    
+    
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

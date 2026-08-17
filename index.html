@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyst Report | Biometric Force Scale & Dynamic Voltage Correlation Analysis</title>
+    
+    <style>
+        :root {
+            /* --- SLEEK BLUE DESIGN SYSTEM --- */
+            --bg-web: #0b1329;          /* Deep midnight blue website background */
+            --bg-container: #1c2541;    /* Sleek card/dashboard container blue */
+            --bg-accent-box: #222e50;   /* Slightly lighter blue for the graph frame */
+            --text-heading: #ffffff;     /* Crisp white for core hierarchy headings */
+            --text-main: #ffffff;        /* CHANGED TO WHITE: High-visibility white for all body text */
+            --text-muted: #5bc0be;       /* Vibrant cyan/teal accent color for metadata and borders */
+            --electric-blue: #3a86ff;   /* Primary solid brand line identifier */
+            --max-width: 800px; 
+            --gap: 2rem;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body { 
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            background-color: var(--bg-web); 
+            color: var(--text-main); 
+            line-height: 1.75; 
+            padding: var(--gap) 1rem;
+            -webkit-print-color-adjust: exact; /* Locks digital colors down during PDF compilation */
+            print-color-adjust: exact;
+        }
+
+        .report-container { 
+            max-width: var(--max-width); 
+            margin: 0 auto; 
+            background-color: var(--bg-container);
+            padding: calc(var(--gap) * 1.5);
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* --- Document Header & Meta Info --- */
+        header {
+            margin-bottom: var(--gap);
+            border-bottom: 3px solid var(--electric-blue);
+            padding-bottom: 1.25rem;
+        }
+
+        header h1 {
+            font-size: 2.25rem;
+            color: var(--text-heading);
+            line-height: 1.25;
+            font-weight: 800;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+
+        .meta-data {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 600;
+        }
+
+        .meta-data strong {
+            color: var(--text-heading);
+        }
+
+        /* --- 1. Visual Anchor (Top Image) --- */
+        .featured-image-wrapper {
+            width: 100%;
+            margin-bottom: var(--gap);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        }
+
+        .featured-image-wrapper img {
+            width: 100%;
+            height: auto;
+            max-height: 380px;
+            object-fit: cover; 
+            display: block;
+        }
+
+        /* --- 2. Narrative Text Section --- */
+        .analysis-description {
+            font-size: 1.05rem;
+            color: var(--text-main);
+            margin-bottom: calc(var(--gap) * 1.5);
+            white-space: pre-wrap; 
+            padding: 0 0.25rem;
+        }
+
+        /* --- 3. Hard Data Visualization (Bottom Graph) --- */
+        .graph-wrapper {
+            background-color: var(--bg-accent-box);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: var(--gap);
+            text-align: center;
+            margin-top: var(--gap);
+            page-break-inside: avoid; /* Keeps graph structured on one page in a PDF */
+        }
+
+        .graph-wrapper img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .graph-caption {
+            font-size: 0.875rem;
+            color: #ffffff; /* CHANGED TO WHITE: High visibility on the dark blue frame */
+            margin-top: 1.25rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* --- TAILORED PDF PRINT CONVERSION RULES --- */
+        @media print {
+            body { 
+                background-color: #0b1329 !important; 
+                padding: 0; 
+            }
+            .report-container { 
+                box-shadow: none; 
+                border: none; 
+                padding: 0; 
+                background-color: #1c2541 !important;
+            }
+            .graph-wrapper { 
+                background-color: #222e50 !important; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <article class="report-container">
+        
+        <!-- Document Header -->
+        <header>
+            <h1>Biometric Force Scale & Dynamic Voltage Correlation Analysis</h1>
+            <div class="meta-data">
+                <span><strong>Analyst:</strong> Senior Systems Engineer</span>
+                <span><strong>Date:</strong> 2026-07-28</span>
+            </div>
+        </header>
+
+        <!-- 1. Top Image Anchor -->
+        <div class="featured-image-wrapper">
+            <img src="https://unsplash.com" alt="Report Header Visual">
+        </div>
+
+        <!-- 2. Technical Description / Findings -->
+        <section class="analysis-description">
+            EXECUTIVE TELEMETRY ASSESSMENT: BIO-INTELLIGENT ENGAGEMENT ARMS
+
+1. SYSTEM SPECIFICATIONS & INITIAL ACQUISITION
+The telemetry data logs evaluated during this testing cycle confirm optimal coordination between the remote computer vision architecture and the user-integrated Myographic Sensor Array (MSA). Initial threat vectors are acquired at an average latency profile of 8.4 milliseconds using a localized edge-computing convolutional neural network (CNN). Upon identifying high-probability kinetic weapon geometries or physical assault postures, the system initializes the command chain without manual vector targeting from the host operator.
+
+2. LOGIC ANALYSIS OF THE 5-SECOND TEMPORAL LOCK
+A rigorous performance review was conducted on the maximum 5-second tactical expiration countdown. Analysts note that this window functions successfully as an automated legal and kinetic safety fuse. Rather than introducing structural operational lag, the 5-second window enforces strict proximity constraints. If the authenticated threat coordinates alter significantly or the target moves outside the optimal field of view (FOV), the internal countdown immediately zeroes out, forcing an instant hard lock on the firing mechanism. This parameter guarantees that lethal or non-lethal force cannot be deployed after an immediate physical crisis has dissolved, mitigating collateral corporate and operator liability.
+
+3. KINETIC FORCE-TO-VOLTAGE RESPONSE CORRELATION
+Biometric feedback loops verified that the output discharge remains directly proportional to the physical exertion recorded by the piezoresistive sensors within the primary tactical grip sleeve. Hand clenches registering under 150 Newtons of kinetic pressure are successfully categorized as involuntary startle reflexes or ordinary physical adjustments, generating a 0V baseline output.
+
+Deliberate engagement thresholds between 150 and 350 Newtons scale smoothly to a localized, non-lethal neuromuscular disruption curve (50kV - 120kV). Lethal high-voltage surges (300kV+) are strictly gated behind a white-knuckle crush boundary calibrated at 400+ Newtons, requiring deliberate, maximal human muscle exertion. This design effectively guarantees that panic-induced micro-spasms cannot accidentally trigger a fatal discharge, isolating maximum lethality to instances of verifiable, high-exertion survival intent.
+        </section>
+
+        <!-- 3. Bottom Graph / Visualization -->
+        <section class="graph-wrapper">
+            <img src="https://unsplash.com" alt="Data Visualization Chart">
+            <div class="graph-caption"><strong>Data Source:</strong> Figure 4.2 - Comparative timeline of Newton pressure curves vs. system discharge metrics.</div>
+        </section>
+
+    </article>
+
+</body>
+</html>
+
+
+
+
