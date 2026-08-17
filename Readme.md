@@ -1,2 +1,3 @@
-#Architecture
-![Proposed Architecture](architecture/ProposedArchitecture.png)
+# Architecture
+![Proposed Architecture](Architecture/ProposedArchitecture.png)
+
