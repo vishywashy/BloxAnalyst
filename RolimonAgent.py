@@ -2,12 +2,11 @@ import rolimons
 from datetime import datetime
 from datetime import timezone
 import pandas as pd
-from ollama import AsyncClient
 from ReactTools import *
 
 
 
-async def rolimonExtractor(itemID):
+def rolimonExtractor(itemID):
      item = rolimons.item(itemID)
      
      print(f"Item RAP: {item.rap}")

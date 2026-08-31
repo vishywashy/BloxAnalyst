@@ -1,16 +1,15 @@
 import httpx
 import pandas as pd
-from ollama import AsyncClient
 
 
 
-async def EconomyInfo(collectibleItemId):
+async def EconomyInfo(assetId):
     client = httpx.AsyncClient()
-    print(collectibleItemId)
-    CoreFinancialURL = f"https://apis.roblox.com/marketplace-sales/v1/item/{collectibleItemId}/resale-data"
+    #CoreFinancialURL = f"https://economy.roblox.com/v1/assets/{assetId}/resale-data"
+    financialurl2 = f"https://economy.roblox.com/v1/assets/{assetId}/resale-data"
     #except Exception:
         #return None
-    response2 = await client.get(CoreFinancialURL)
+    response2 = await client.get(financialurl2)
     await client.aclose()
     value_list = []
     date_list = []
@@ -32,11 +31,5 @@ async def EconomyInfo(collectibleItemId):
     return [response2.json(), volumeValues, Volumedates, df.describe()]
 
 
-
-    
-    
-
-
-
-        
-
+#import asyncio
+#print(asyncio.run(EconomyInfo(1365767)))
